@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>EFA General Store</h1>
+    <p class="lead">General Store application built using C# and ASP.NET</p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Getting started</h2>
+        <p>
+            Our General Store, located in rural Indiana, is host to a multitude of fine food and items of distinction.<br />
+            Come browse our products and see what we have for you.
+        </p>
+        <p>
+            @Html.ActionLink("Check Products", "Index", "Product", null, new { @class="btn btn-primary btn-large"})
+        </p>
+    </div>
+    <div class="col-md-4">
+        <img class="img-responsive" src="~/Content/possumjunction.jpg" style="border-radius:6px;" />
+    </div>
+    <div class="col-md-4">
+        <h2>Web Hosting</h2>
+        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    </div>
+</div>
