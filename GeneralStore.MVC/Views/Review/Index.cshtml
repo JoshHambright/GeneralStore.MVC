@@ -1,0 +1,69 @@
+﻿@model IEnumerable<GeneralStore.MVC.Models.Review>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Product.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rating)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReviewTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReviewMessage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateOfReviewUTC)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateOfUpdateUTC)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Customer.FirstName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Product.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Rating)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ReviewTitle)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ReviewMessage)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.DateOfReviewUTC)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.DateOfUpdateUTC)
+    </td>
+    <td>
+        @Html.ActionLink(" ", "Edit", new { id = item.CustomerID }, new { @class = "glyphicon glyphicon-edit" })
+        @Html.ActionLink(" ", "Details", new { id = item.CustomerID }, new { @class = " glyphicon glyphicon-info-sign" })
+        @Html.ActionLink(" ", "Delete", new { id = item.CustomerID }, new { @class = " glyphicon glyphicon-trash" })
+    </td>
+</tr>
+}
+
+</table>

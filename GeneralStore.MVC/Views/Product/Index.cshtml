@@ -43,10 +43,9 @@
                 @Html.DisplayFor(model => item.IsFood)
             </td>
             <td>
-
-                @Html.ActionLink(" Edit", "Edit", new { id = item.ProductID }, new { @class = "btn btn-primary glyphicon glyphicon-edit" })&nbsp &nbsp
-                @Html.ActionLink(" Details", "Details", new { id = item.ProductID }, new { @class = "btn btn-info glyphicon glyphicon-info-sign" })&nbsp &nbsp
-                @Html.ActionLink(" Remove", "Delete", new { id = item.ProductID }, new { @class = "btn btn-danger glyphicon glyphicon-trash" })
+                @Html.ActionLink(" ", "Edit", new { id = item.ProductID }, new { @class = "glyphicon glyphicon-edit" })
+                @Html.ActionLink(" ", "Details", new { id = item.ProductID }, new { @class = " glyphicon glyphicon-info-sign" })
+                @Html.ActionLink(" ", "Delete", new { id = item.ProductID }, new { @class = " glyphicon glyphicon-trash" })
             </td>
         </tr>
     }

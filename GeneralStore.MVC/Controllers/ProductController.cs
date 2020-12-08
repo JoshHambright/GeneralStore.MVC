@@ -97,9 +97,37 @@ namespace GeneralStore.MVC.Controllers
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
             }
             Product product = _db.Products.Find(id);
+            double totReview = 0;
+            foreach (var r in product.Reviews)
+            {
+                totReview += r.Rating;
+            }
+            var avgReview = totReview / product.Reviews.Count();
+            var productDetail = new ProductDetail
+            {
+                ProductID = product.ProductID,
+                Name = product.Name,
+                InventoryCount = product.InventoryCount,
+                Price = product.Price,
+                IsFood = product.IsFood,
+                Reviews = product.Reviews
+                            .Select(
+                                x => new ReviewListView
+                                {
+                                    ReviewID = x.ReviewID,
+                                    Rating = x.Rating,
+                                    CustomerName = x.Customer.FullName,
+                                    ReviewTitle = x.ReviewTitle,
+                                    ReviewMessage = x.ReviewMessage,
+                                    DateOfReview = x.DateOfReviewUTC
+                                }
+                                ).ToList(),
+                AvgReview = avgReview
+
+            };
             if (product == null)
                 return HttpNotFound();
-            return View(product);
-        }
+            return View(productDetail);
     }
+}
 }

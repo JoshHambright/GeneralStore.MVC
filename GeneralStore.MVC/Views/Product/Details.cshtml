@@ -1,4 +1,4 @@
-﻿@model GeneralStore.MVC.Models.Product
+﻿@model GeneralStore.MVC.Models.ProductDetail
 
 @{
     ViewBag.Title = "Details";
@@ -41,9 +41,63 @@
         <dd>
             @Html.DisplayFor(model => model.IsFood)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AvgReview)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AvgReview)
+        </dd>
 
     </dl>
 </div>
+<div>
+    <h4>Reviews</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        @foreach (var item in Model.Reviews)
+        {
+            <dt>
+                @Html.DisplayNameFor(modelItem => item.ReviewID)
+            </dt>
+            <dd>
+                @Html.DisplayFor(modelItem => item.ReviewID)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(modelItem => item.Rating)
+            </dt>
+            <dd>
+                @Html.DisplayFor(modelItem => item.Rating)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(modelItem => item.CustomerName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(modelItem => item.CustomerName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(modelItem => item.ReviewTitle)
+            </dt>
+            <dd>
+                @Html.DisplayFor(modelItem => item.ReviewTitle)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(modelItem => item.ReviewMessage)
+            </dt>
+            <dd>
+                @Html.DisplayFor(modelItem => item.ReviewMessage)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(modelItem => item.DateOfReview)
+            </dt>
+            <dd>
+                @Html.DisplayFor(modelItem => item.DateOfReview)
+            </dd>
+            <br />
+
+        }
+    </dl>
+</div>
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ProductID }) |
     @Html.ActionLink("Back to List", "Index")

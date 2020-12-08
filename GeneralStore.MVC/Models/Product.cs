@@ -20,6 +20,7 @@ namespace GeneralStore.MVC.Models
         [Required]
         [Display(Name="Is it Food")]
         public bool IsFood { get; set; }
+        public virtual List<Review> Reviews { get; set; } = new List<Review>();
 
     }
 

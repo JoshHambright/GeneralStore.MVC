@@ -24,5 +24,6 @@ namespace GeneralStore.MVC.Models
                 return FirstName + " " + LastName;
             }
         }
+        public virtual List<Review> Reviews { get; set; } = new List<Review>();
     }
 }
