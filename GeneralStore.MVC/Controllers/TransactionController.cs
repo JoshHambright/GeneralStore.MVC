@@ -59,7 +59,15 @@ namespace GeneralStore.MVC.Controllers
                 trans.TransactionDate = DateTimeOffset.Now;
                 var product = _db.Products.Find(trans.ProductID);
                 if (trans.Quantity > product.InventoryCount)
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest, $"Invalid Quantity. There are only {product.InventoryCount} of {product.Name} let if stock.");
+                {
+                    ModelState.AddModelError("", 
+                        $"Quantity ({trans.Quantity}) exceeds available inventory ({product.InventoryCount}) of {product.Name} left in stock.");
+                    ViewBag.CustomerList = new SelectList(_db.Customers, "CustomerID", "FullName");
+                    ViewBag.ProductList = new SelectList(_db.Products, "ProductID", "Name");
+                    return View(trans);
+                    //return new HttpStatusCodeResult(HttpStatusCode.BadRequest, $"Invalid Quantity. There are only {product.InventoryCount} of {product.Name} let if stock.");
+                }
+                
                 product.InventoryCount -= trans.Quantity;
                 _db.Entry(product).State = EntityState.Modified;
                 _db.Transactions.Add(trans);
@@ -97,8 +105,15 @@ namespace GeneralStore.MVC.Controllers
                 int origionalInventorybeforeTransaction = product.InventoryCount + originalTrans.Quantity;
                 //int newPotentialInventory = product.InventoryCount - trans.Quantity;
                 if(trans.Quantity > origionalInventorybeforeTransaction)
-                    return new HttpStatusCodeResult(HttpStatusCode
-                        .BadRequest, $"Invalid Quantity. Your updated transaction would result in a backorder.");
+                {
+                    ModelState.AddModelError("",
+                        $"Quantity ({trans.Quantity}) exceeds available inventory ({product.InventoryCount}) of {product.Name} left in stock.");
+                    ViewBag.CustomerList = new SelectList(_db.Customers, "CustomerID", "FullName");
+                    ViewBag.ProductList = new SelectList(_db.Products, "ProductID", "Name");
+                    return View(trans);
+                }
+                    //return new HttpStatusCodeResult(HttpStatusCode
+                    //    .BadRequest, $"Invalid Quantity. Your updated transaction would result in a backorder.");
                 product.InventoryCount += originalTrans.Quantity;
                 product.InventoryCount -= trans.Quantity;
                 trans.TransactionDate = DateTimeOffset.Now;
